@@ -22,12 +22,12 @@ choice = 0
 while loop == 1:
     choice = menu()
     if choice == 1:
-        intocm(int(input("Enter ammount of inches")))
+        intocm(int(input("Enter amount of inches")))
     if choice == 2:
-        cmtoin(int(input("Enter ammount of centimetres")))
+        cmtoin(int(input("Enter amount of centimetres")))
     if choice == 10:
         loop = 0
     time.sleep(3)
 
 print("")
-print("Thankyou for using the Simple Unit Convertor (SUC)")
+print("Thank you for using the Simple Unit Convertor (SUC)")
