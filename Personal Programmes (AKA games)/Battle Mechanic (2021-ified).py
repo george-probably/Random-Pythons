@@ -4,7 +4,7 @@ Game Version: Alpha 0.21
 Last Edited: 09/07/21
 """
 import random, time, webbrowser
-def menu():
+def Menu():
     print ("\nYou have:",health,"HP and",potions,"Health potions\n")
     time.sleep(1)
     print ("1) Attack (",DamageMIN,"-",DamageMAX,"damage)")
@@ -14,7 +14,7 @@ def menu():
     print ("10) Developer's site")
     time.sleep(1)
     return int(input("\nSelect your choice: "))
-def replay(choice):
+def Replay(choice):
         print("")
         if choice == ("yes") or choice == ("True") or  choice == ("1"):
             gamemode == True
@@ -77,7 +77,7 @@ while gamemode == True:
     print("Welcome to the battle. you start with 10 hp!")
     while health>0 and enemyhealth>0:
         try:
-            att = menu()
+            att = Menu()
         except ValueError:
             print("\nWait a second, we're looking for a number! Try again...")
         #Battle Mechanics below!
@@ -130,4 +130,4 @@ while gamemode == True:
         print("Unlucky, you lost.")
     else:
         print("It was a draw!")
-    replay (input("Do you wish to replay? (yes or no): "))
+    Replay (input("Do you wish to replay? (yes or no): "))
