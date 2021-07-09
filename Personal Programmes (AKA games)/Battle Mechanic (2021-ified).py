@@ -1,11 +1,12 @@
 """
 Created By: George Chachanidze
 Game Version: Alpha 0.21
-Last Edited: 09/07/21
+Last Edited: 10/07/21
 """
 import random, time, webbrowser
 def Menu():
-    print ("\nYou have:",health,"HP and",potions,"Health potions\n")
+    print ("\nYou:",health,"HP and",potions,"Health potions")
+    print ("Enemy:",enemyhealth,"HP and",enemypot,"Health potions\n")
     time.sleep(1)
     print ("1) Attack (",DamageMIN,"-",DamageMAX,"damage)")
     print ("2) Heal (5 hp)")
@@ -27,24 +28,26 @@ def Replay(choice):
             exit()
 def EnemyMove():
     global enemypot, enemyhealth, health
-    gobbchoice = random.randint(1, 3)
+    if enemyhealth >= 8 or enemypot == 0:
+        gobbchoice = 1
+    elif enemyhealth <= 2:
+        gobbchoice = 3
+    else:
+        gobbchoice = random.randint(1, 3)
     if gobbchoice <= 2:
         damage = random.randint(1, 5)
         health = health - damage
-        print("\nYou took",damage,"point(s) of damage. You have",health,"hp remaining\n")
+        print("\nYou took",damage,"point(s) of damage. You have",health,"hp remaining")
         time.sleep(2)
     else:
-        if enemypot > 0:
-            enemyhealth = enemyhealth + 5
-            print("\nThe goblin restored it's health. It has",enemyhealth,"hp remaining.\n")
-            enemypot = enemypot - 1
+        enemyhealth = enemyhealth + 5
+        print("\nThe goblin restored it's health. It has",enemyhealth,"hp remaining.\n")
+        enemypot = enemypot - 1
+        time.sleep(2)
+        if enemyhealth > 10:
+            print ("The Goblin exceeded maximum heath, reducing back to 10 HP")
+            enemyhealth = 10
             time.sleep(2)
-            if enemyhealth > 10:
-                print ("The Goblin exceeded maximum heath, reducing back to 10 HP")
-                enemyhealth = 10
-                time.sleep(2)
-        else:
-            print ("Goblin tried to heal but ran out of potions")
 def WeaponPicker():
     global DamageMIN, DamageMAX
     picked = False
@@ -80,6 +83,7 @@ while gamemode == True:
             att = Menu()
         except ValueError:
             print("\nWait a second, we're looking for a number! Try again...")
+            att = 24997
         #Battle Mechanics below!
         if att == 1: #Attack
             attack = random.randint(DamageMIN,DamageMAX)
