@@ -71,7 +71,7 @@ def WeaponPicker():
         print("Number not recognised, please try again")
 def Startup():
     global health, enemyhealth, potions, enemypot, att, gamemode, DamageMIN, DamageMAX
-    health, enemyhealth, potions, enemypot, att, gamemode, DamageMIN, DamageMAX = 10, 10, 3, 3, 24997, True, 11, 15
+    health, enemyhealth, potions, enemypot, att, gamemode, DamageMIN, DamageMAX = 10, 10, 3, 3, 24997, True, 1, 5
 Startup()
 while gamemode == True:
     print("Welcome to the battle. you start with 10 hp!")
