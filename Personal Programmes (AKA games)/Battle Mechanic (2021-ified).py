@@ -4,7 +4,6 @@ Game Version: Alpha 0.21
 Last Edited: 09/07/21
 """
 import random, time, webbrowser
-health, enemyhealth, potions, enemypot, att, gamemode, DamageMIN, DamageMAX = 10, 10, 3, 3, 24997, True, 1, 5
 def menu():
     print ("\nYou have:",health,"HP and",potions,"Health potions\n")
     time.sleep(1)
@@ -19,6 +18,7 @@ def replay(choice):
         print("")
         if choice == ("yes") or choice == ("True") or  choice == ("1"):
             gamemode == True
+            Startup()
         elif choice == ("no") or choice == ("False") or  choice == ("0"):
             exit()
         else:
@@ -69,6 +69,10 @@ def WeaponPicker():
         DamageMAX = 7
     else:
         print("Number not recognised, please try again")
+def Startup():
+    global health, enemyhealth, potions, enemypot, att, gamemode, DamageMIN, DamageMAX
+    health, enemyhealth, potions, enemypot, att, gamemode, DamageMIN, DamageMAX = 10, 10, 3, 3, 24997, True, 11, 15
+Startup()
 while gamemode == True:
     print("Welcome to the battle. you start with 10 hp!")
     while health>0 and enemyhealth>0:
@@ -122,10 +126,8 @@ while gamemode == True:
             time.sleep(2)
     if health>0:
         print ("Well done, you won!")
-        replay (input("Do you wish to replay? (yes or no): "))
     elif enemyhealth>0:
         print("Unlucky, you lost.")
-        replay (input("Do you wish to replay? (yes or no): "))
     else:
         print("It was a draw!")
-        replay (input("Do you wish to replay? (yes or no): "))
+    replay (input("Do you wish to replay? (yes or no): "))
