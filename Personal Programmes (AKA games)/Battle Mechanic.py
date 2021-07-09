@@ -73,6 +73,7 @@ while gamemode == True:
                 else:
                     print ("Goblin tried to heal but ran out of potions")
 
+
         elif att == 2: #if you heal
             if potions > 0:
                 health = health + 5
@@ -136,6 +137,7 @@ while gamemode == True:
                     time.sleep(2)
                 else:
                     print ("Goblin tried to heal but ran out of potions")
+
         elif att == 5:
             webbrowser.open('snappy-tech.blogspot.com')
             exit()
