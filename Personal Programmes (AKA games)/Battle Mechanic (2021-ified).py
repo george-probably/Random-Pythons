@@ -47,11 +47,17 @@ def EnemyMove():
             print ("Goblin tried to heal but ran out of potions")
 def WeaponPicker():
     global DamageMIN, DamageMAX
+    picked = False
     print("\nWeapons Menu:")
     print("1) Sword (1-5 damage)")
     print("2) Knife (2-3 damage)")
     print("3) Gun (0-7 damage)")
-    weaponchoice = int(input("\nPick a weapon: "))
+    while picked==False:
+        try:
+            weaponchoice = int(input("\nPick a weapon: "))
+            picked = True
+        except ValueError:
+            print("\nWait a second, we're looking for a number! Try again...")
     if weaponchoice == 1:
         DamageMIN = 1
         DamageMAX = 5
@@ -61,6 +67,8 @@ def WeaponPicker():
     elif weaponchoice == 3:
         DamageMIN = 0
         DamageMAX = 7
+    else:
+        print("Number not recognised, please try again")
 while gamemode == True:
     print("Welcome to the battle. you start with 10 hp!")
     while health>0 and enemyhealth>0:
