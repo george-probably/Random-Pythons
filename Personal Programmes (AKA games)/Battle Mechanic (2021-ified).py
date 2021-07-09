@@ -4,15 +4,14 @@ Game Version: Alpha 0.21
 Last Edited: 09/07/21
 """
 import random, time, webbrowser
-gamemode = True
-health, enemyhealth, potions, enemypot, att = 10, 10, 3, 3, 24997
+health, enemyhealth, potions, enemypot, att, gamemode, DamageMIN, DamageMAX = 10, 10, 3, 3, 24997, True, 1, 5
 def menu():
     print ("\nYou have:",health,"HP and",potions,"Health potions\n")
     time.sleep(1)
-    print ("1) Attack (1-5 damage)")
+    print ("1) Attack (",DamageMIN,"-",DamageMAX,"damage)")
     print ("2) Heal (5 hp)")
     print ("3) Run")
-    #print ("4) Change weapon")
+    print ("4) Change weapon")
     print ("10) Developer's site")
     time.sleep(1)
     return int(input("\nSelect your choice: "))
@@ -46,6 +45,22 @@ def EnemyMove():
                 time.sleep(2)
         else:
             print ("Goblin tried to heal but ran out of potions")
+def WeaponPicker():
+    global DamageMIN, DamageMAX
+    print("\nWeapons Menu:")
+    print("1) Sword (1-5 damage)")
+    print("2) Knife (2-3 damage)")
+    print("3) Gun (0-7 damage)")
+    weaponchoice = int(input("\nPick a weapon: "))
+    if weaponchoice == 1:
+        DamageMIN = 1
+        DamageMAX = 5
+    elif weaponchoice == 2:
+        DamageMIN = 2
+        DamageMAX = 3
+    elif weaponchoice == 3:
+        DamageMIN = 0
+        DamageMAX = 7
 while gamemode == True:
     print("Welcome to the battle. you start with 10 hp!")
     while health>0 and enemyhealth>0:
@@ -55,7 +70,7 @@ while gamemode == True:
             print("\nWait a second, we're looking for a number! Try again...")
         #Battle Mechanics below!
         if att == 1: #Attack
-            attack = random.randint(1, 5)
+            attack = random.randint(DamageMIN,DamageMAX)
             enemyhealth = enemyhealth - attack
             print("\nYou caused",attack,"point(s) of damage. The goblin has",enemyhealth,"hp remaining")
             time.sleep(2)
@@ -82,8 +97,7 @@ while gamemode == True:
             time.sleep(2)
             EnemyMove()
         elif att == 4: #Change Weapon
-            print("How on earth did you find this? WIP.")
-            exit()
+            weapon = WeaponPicker()
         elif att == 10: #Website
             webbrowser.open('https://www.youtube.com/c/SnappyTech')
             exit()
