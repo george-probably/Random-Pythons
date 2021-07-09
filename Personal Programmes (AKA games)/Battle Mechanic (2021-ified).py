@@ -5,6 +5,7 @@ Last Edited: 09/07/21
 """
 import random, time, webbrowser
 gamemode = True
+health, enemyhealth, potions, enemypot, att = 10, 10, 3, 3, 24997
 def menu():
     print ("\nYou have:",health,"HP and",potions,"Health potions\n")
     time.sleep(1)
@@ -25,7 +26,8 @@ def replay(choice):
             print("Input not understood, game will now shut down.")
             time.sleep(2)
             exit()
-def EnemyMove(enemypot,enemyhealth,health):
+def EnemyMove():
+    global enemypot, enemyhealth, health
     gobbchoice = random.randint(1, 3)
     if gobbchoice <= 2:
         damage = random.randint(1, 5)
@@ -39,17 +41,12 @@ def EnemyMove(enemypot,enemyhealth,health):
             enemypot = enemypot - 1
             time.sleep(2)
             if enemyhealth > 10:
-                print ("\nThe Goblin exceeded maximum heath, reducing back to 10 HP")
+                print ("The Goblin exceeded maximum heath, reducing back to 10 HP")
                 enemyhealth = 10
                 time.sleep(2)
         else:
             print ("Goblin tried to heal but ran out of potions")
 while gamemode == True:
-    health = 10
-    enemyhealth = 10
-    potions = 3
-    enemypot = 3
-    att = 24997
     print("Welcome to the battle. you start with 10 hp!")
     while health>0 and enemyhealth>0:
         try:
@@ -64,7 +61,7 @@ while gamemode == True:
             time.sleep(2)
             if enemyhealth <= 0:
                 break
-            EnemyMove(enemypot,enemyhealth,health)
+            EnemyMove()
         elif att == 2: #Heal
             if potions > 0:
                 health = health + 5
@@ -79,11 +76,11 @@ while gamemode == True:
             else:
                 print("\nYou tried to heal but you have run out of potions")
                 time.sleep(2)
-            EnemyMove(enemypot,enemyhealth,health)
+            EnemyMove()
         elif att == 3: #Run
             print ("\nCoward! Continue the fight!")
             time.sleep(2)
-            EnemyMove(enemypot,enemyhealth,health)
+            EnemyMove()
         elif att == 4: #Change Weapon
             print("How on earth did you find this? WIP.")
             exit()
