@@ -61,10 +61,10 @@ def WeaponPicker():
         print("Number not recognised, please try again")
 def Replay(choice):
         print("")
-        if choice == ("yes") or choice == ("True") or  choice == ("1"):
+        if choice == ("Yes") or choice == ("True") or  choice == ("1"):
             gamemode == True
             Startup()
-        elif choice == ("no") or choice == ("False") or  choice == ("0"):
+        elif choice == ("No") or choice == ("False") or  choice == ("0"):
             exit()
         else:
             print("Input not understood, game will now shut down.")
