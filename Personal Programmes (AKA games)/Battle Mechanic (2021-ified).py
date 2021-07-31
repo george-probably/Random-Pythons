@@ -1,7 +1,11 @@
 import random, time, webbrowser
 def Startup():
-    global health,enemyHealth,potions,enemyPotions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX
-    health,enemyHealth,potions,enemyPotions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX = 10,10,3,3,5,24997,True,1,5
+    global health,enemyHealth,potions,enemyPotions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX,enemyType,enemyDamageMIN,enemyDamageMAX
+    health,potions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX,enemyType = 10,3,5,24997,True,1,5,"goblin"
+    if enemyType == "goblin":
+        enemyHealth, enemyPotions, enemyDamageMIN,enemyDamageMAX = 10,3,1,5
+    else:
+        enemyHealth, enemyPotions, enemyDamageMIN,enemyDamageMAX = 1,1,1,1
 def Menu():
     print ("\nYou:",health,"HP and",potions,"Health potions")
     print ("Enemy:",enemyHealth,"HP and",enemyPotions,"Health potions\n")
@@ -22,17 +26,17 @@ def EnemyMove():
     else:
         enemyChoice = random.randint(1, 3)
     if enemyChoice <= 2:
-        damage = random.randint(1, 5)
+        damage = random.randint(damageMIN,damageMAX)
         health = health - damage
         print("\nYou took",damage,"point(s) of damage. You have",health,"hp remaining")
         time.sleep(2)
     else:
-        enemyHealth = enemyHealth + 5
-        print("\nThe goblin restored it's health. It has",enemyHealth,"hp remaining.\n")
-        enemyPotions = enemyPotions - 1
+        enemyHealth = enemyHealth + potionStrength
+        print("\nThe",enemyType,"restored it's health. It has",enemyHealth,"hp remaining.\n")
+        enemyPotions -= 1
         time.sleep(2)
         if enemyHealth > 10:
-            print ("The Goblin exceeded maximum heath, reducing back to 10 HP")
+            print ("The",enemyType,"exceeded maximum heath, reducing back to 10 HP")
             enemyHealth = 10
             time.sleep(2)
 def WeaponPicker():
@@ -87,7 +91,7 @@ while gameMode == True:
         if playerchoice == 1: #Attack
             attack = random.randint(damageMIN,damageMAX)
             enemyHealth = enemyHealth - attack
-            print("\nYou caused",attack,"point(s) of damage. The goblin has",enemyHealth,"hp remaining")
+            print("\nYou caused",attack,"point(s) of damage. The",enemyType,"has",enemyHealth,"hp remaining")
             time.sleep(2)
             if enemyHealth <= 0:
                 break
@@ -122,7 +126,7 @@ while gameMode == True:
         elif playerchoice == 9001: #Exit
             exit()
         elif playerchoice == 24997: #Default
-            print()
+            continue
         else:
             print("\nThe option you have chosen is not within the menu. Please try again.\n")
             time.sleep(2)
