@@ -1,11 +1,13 @@
 import random, time, webbrowser
 def Startup():
     global health,enemyHealth,potions,enemyPotions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX,enemyType,enemyDamageMIN,enemyDamageMAX
-    health,potions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX,enemyType = 10,3,5,24997,True,1,5,"goblin"
-    if enemyType == "goblin":
-        enemyHealth, enemyPotions, enemyDamageMIN,enemyDamageMAX = 10,3,1,5
+    health,potions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX,enemyType = 10,3,5,24997,True,1,5, random.randint(1,3)
+    if enemyType == 1:
+        enemyType, enemyHealth, enemyPotions, enemyDamageMIN,enemyDamageMAX = "goblin",10,3,1,5
+    elif enemyType == 2:
+        enemyType, enemyHealth, enemyPotions, enemyDamageMIN,enemyDamageMAX = "kronenburg",1,0,0,1
     else:
-        enemyHealth, enemyPotions, enemyDamageMIN,enemyDamageMAX = 1,1,1,1
+        enemyType, enemyHealth, enemyPotions, enemyDamageMIN,enemyDamageMAX = "giant troll",20,2,3,10
 def Menu():
     print ("\nYou:",health,"HP and",potions,"Health potions")
     print ("Enemy:",enemyHealth,"HP and",enemyPotions,"Health potions\n")
