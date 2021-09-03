@@ -18,25 +18,25 @@ def checkCave(chosenCave):
     print('A large dragon appears in front of you and...')
     time.sleep(1)
 
-    friendlyCave = random.randint(1, 2)
+    #friendlyCave = random.randint(1, 2)
+    friendlyCave = 1
 
     if chosenCave == friendlyCave:
          print('Gives you his treasure!')
     else:
-        print('Starts a fight, with his goblin friend!!\n')
+        print('Starts a fight, with his friend!!\n')
         time.sleep(1)
-        BattleMechanic.main()
+        BattleMechanic.main(random.randint(1,3))
         if BattleMechanic.battleWin == True:
             print("You won! The dragon is a creature of it's word, and you take their treasure")
         else:
             print("You lose, the dragon swallows you in one bite!")
 
-
-playAgain = "Yes"
-while playAgain == ("Yes") or playAgain == ("yes") or playAgain == ("True") or  playAgain == ("1"):
-    try:
-        caveNumber = chooseCave()
-        checkCave(caveNumber)
-    except ValueError:
-        print("\nWait a second, we're looking for a number! Try again...\n")
-    playAgain = input('Do you want to play again? (yes or no): ')
+def main():
+    while True:
+        try:
+            caveNumber = chooseCave()
+            checkCave(caveNumber)
+            break
+        except ValueError:
+            print("\nWait a second, we're looking for a number! Try again...\n")

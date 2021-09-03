@@ -1,11 +1,13 @@
 import random, time, webbrowser
-def Startup():
-    global health,enemyHealth,potions,enemyPotions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX,enemyType,enemyDamageMIN,enemyDamageMAX, battleWin
-    health,potions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX,enemyType = 10,3,5,24997,True,1,5,"goblin"
-    if enemyType == "goblin":
-        enemyHealth, enemyPotions, enemyDamageMIN,enemyDamageMAX = 10,3,1,5
+def Startup(enemyType):
+    global health,enemyHealth,enemyHealthMax,potions,enemyPotions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX,enemyName,enemyDamageMIN,enemyDamageMAX
+    health,potions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX = 10,3,5,24997,True,1,5
+    if enemyType == 1:
+        enemyName,enemyHealth,enemyHealthMax,enemyPotions,enemyDamageMIN,enemyDamageMAX = "goblin",10,10,3,1,5
+    elif enemyType == 2:
+        enemyName,enemyHealth,enemyHealthMax,enemyPotions,enemyDamageMIN,enemyDamageMAX = "kronenburg",1,1,0,0,1
     else:
-        enemyHealth, enemyPotions, enemyDamageMIN,enemyDamageMAX = 1,1,1,1
+        enemyName,enemyHealth,enemyHealthMax,enemyPotions,enemyDamageMIN,enemyDamageMAX = "giant troll",20,20,2,3,10
 def Menu():
     print ("\nYou:",health,"HP and",potions,"Health potions")
     print ("Enemy:",enemyHealth,"HP and",enemyPotions,"Health potions\n")
@@ -19,9 +21,9 @@ def Menu():
     return int(input("\nSelect your choice: "))
 def EnemyMove():
     global  health, enemyHealth, enemyPotions
-    if enemyHealth >= 8 or enemyPotions == 0: #Enemy will not try to heal if health is high, or it is out of potions
+    if enemyHealth >= (enemyHealthMax/2) or enemyPotions == 0: #Enemy will not try to heal if health is high, or it is out of potions
         enemyChoice = 1
-    elif enemyHealth <= 2 and enemyPotions > 0: #Enemy will automatically heal if health is low, and it has a potion
+    elif enemyHealth <= (enemyHealthMax/5) and enemyPotions > 0: #Enemy will automatically heal if health is under 20%, and it has a potion
         enemyChoice = 3
     else:
         enemyChoice = random.randint(1, 3)
@@ -32,11 +34,11 @@ def EnemyMove():
         time.sleep(2)
     else:
         enemyHealth = enemyHealth + potionStrength
-        print("\nThe",enemyType,"restored it's health. It has",enemyHealth,"hp remaining.\n")
+        print("\nThe",enemyName,"restored it's health. It has",enemyHealth,"hp remaining.\n")
         enemyPotions -= 1
         time.sleep(2)
-        if enemyHealth > 10:
-            print ("The",enemyType,"exceeded maximum heath, reducing back to 10 HP")
+        if enemyHealth > enemyHealthMax:
+            print ("The",enemyName,"exceeded maximum heath, reducing back to 10 HP")
             enemyHealth = 10
             time.sleep(2)
 def WeaponPicker():
@@ -67,9 +69,9 @@ def WeaponPicker():
     else:
         print("Number not recognised, please try again")
 
-def main():
-    global health,enemyHealth,potions,enemyPotions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX,enemyType,enemyDamageMIN,enemyDamageMAX, battleWin
-    Startup()
+def main(enemyTypeChoice):
+    global health,enemyHealth,potions,enemyPotions,potionStrength,playerchoice,gameMode,damageMIN,damageMAX,enemyName,enemyDamageMIN,enemyDamageMAX, battleWin
+    Startup(enemyTypeChoice)
     print("Welcome to the battle. you start with", health ,"hp!")
     while health>0 and enemyHealth>0:
         try:
@@ -81,7 +83,7 @@ def main():
         if playerchoice == 1: #Attack
             attack = random.randint(damageMIN,damageMAX)
             enemyHealth = enemyHealth - attack
-            print("\nYou caused",attack,"point(s) of damage. The",enemyType,"has",enemyHealth,"hp remaining")
+            print("\nYou caused",attack,"point(s) of damage. The",enemyName,"has",enemyHealth,"hp remaining")
             time.sleep(2)
             if enemyHealth <= 0:
                 break

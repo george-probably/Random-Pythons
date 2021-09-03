@@ -1,0 +1,2 @@
+# Game Build
+This is approximately what I had been going for 8 years ago. The Map.py is the engine, where you are placed in the middle of a grid and navigating to the other "1"s on the map triggers the cave chooser. Currently, 1 will always result in a friendly interaction, and 2 will always be hostile. There are 3 kinds of enemy with differing levels of strength, health, and potions.
